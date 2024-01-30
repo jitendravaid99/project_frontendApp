@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKEA absence App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <body class="container mt-4">
+    <h1 class="mb-4" align="center">IKEA Absence Management Portal</h1>
+    <form id="actionForm">
+        <div class="form-group">
+            <label for="actionSelect">Select Action:</label>
+            <select class="form-control" id="actionSelect" onchange="handleActionChange()">
+                <option value="getDataAll">Business unit info</option>
+                <option value="getDataById">Absence Quota info</option>
+                <option value="createData">Request Absence</option>
+                <option value="updateData">Update Absence</option>
+                <option value="deleteData">Delete Absence info</option>
+            </select>
+        </div>
+        <div class="card-header">
+
+        <div id="dataByIdDiv" class="form-group" style="display: none;">
+            <label for="quota_id">Quota ID:</label>
+            <input type="text" class="form-control" id="quota_id" placeholder="Enter ID">
+        </div>
+
+    
+
+
+        <div id="createUpdateDataDiv" class="form-group" style="display: none;">
+            <div class="form-row">
+            <label for="person_id">Person ID:</label>
+            <input type="text" class="form-control" id="person_id" placeholder="Enter Person ID">
+            </div>
+            <br>
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="absence_type">Absence Type</label>
+                <input type="text" class="form-control" id="absence_type" placeholder="Enter Data">
+                </div>
+                <div class="form-group col-md-6">
+                <label for="sub_absence_type">Sub Absence Type</label>
+                <input type="text" class="form-control" id="sub_absence_type" placeholder="Enter Data">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="start_date">Start Date:</label>
+                <input type="datetime-local" class="form-control" id="start_date" >
+                </div>
+                <div class="form-group col-md-6">
+                <label for="end_date">End Date:</label>
+                <input type="datetime-local" class="form-control" id="end_date">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <div id="data-container" class="mt-4"></div>
+
+    <script src="/js/app.js"></script>
+    <script>
+        function handleActionChange() {
+            const actionSelect = document.getElementById('actionSelect');
+            const dataByIdDiv = document.getElementById('dataByIdDiv');
+
+            const createUpdateDataDiv = document.getElementById('createUpdateDataDiv');
+
+            dataByIdDiv.style.display = (actionSelect.value === 'getDataById' ) ? 'block' : 'none';
+            createUpdateDataDiv.style.display = (actionSelect.value === 'createData' || actionSelect.value === 'updateData' ||  actionSelect.value === 'deleteData') ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
